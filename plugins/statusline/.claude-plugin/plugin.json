@@ -1,0 +1,10 @@
+{
+  "name": "statusline",
+  "displayName": "Status line",
+  "description": "Строка состояния в четырёх стилях: модель, каталог и ветка, заполнение контекста, лимиты 5 часов и 7 дней со временем до сброса. Стиль — /statusline:style.",
+  "author": { "name": "scary-production", "url": "https://github.com/scary-production" },
+  "homepage": "https://github.com/scary-production/claude-plugins",
+  "repository": "https://github.com/scary-production/claude-plugins",
+  "license": "MIT",
+  "keywords": ["statusline", "context", "rate-limits"]
+}

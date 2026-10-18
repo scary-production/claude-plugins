@@ -1,0 +1,27 @@
+{
+  "name": "scary-production",
+  "owner": { "name": "scary-production", "url": "https://github.com/scary-production" },
+  "metadata": {
+    "description": "Плагины Claude Code: строка состояния в нескольких стилях, пороги контекста и лимитов, скиллы для Go и PostgreSQL."
+  },
+  "plugins": [
+    {
+      "name": "statusline",
+      "source": "./plugins/statusline",
+      "description": "Строка состояния в четырёх стилях: модель, каталог и ветка, заполнение контекста, лимиты 5 часов и 7 дней со временем до сброса.",
+      "category": "productivity"
+    },
+    {
+      "name": "context-guard",
+      "source": "./plugins/context-guard",
+      "description": "Пороги заполнения контекста: модель доводит шаг, затем завершает сессию и записывает, что осталось. Предупреждения о лимитах 5 часов и 7 дней.",
+      "category": "productivity"
+    },
+    {
+      "name": "go-postgres",
+      "source": "./plugins/go-postgres",
+      "description": "Скиллы для Go-сервисов на PostgreSQL: pgx и go-transaction-manager, конкурентная запись и блокировки, миграции, тюнинг запросов.",
+      "category": "development"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+version: "2"
+
+run:
+  go: "1.27"
+
+linters:
+  default: standard
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - unused
+    - ineffassign
+    - bodyclose
+    - errorlint
+    - gosec
+  settings:
+    errcheck:
+      check-type-assertions: true
+      # Вывод CLI в stdout: если терминал закрыт, сообщить об этом некуда.
+      exclude-functions:
+        - fmt.Fprint
+        - fmt.Fprintf
+        - fmt.Fprintln
+  exclusions:
+    generated: strict
+    rules:
+      - path: _test\.go
+        linters: [gosec, errcheck]
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/scary-production/claude-plugins

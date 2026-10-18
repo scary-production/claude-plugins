@@ -1,0 +1,9 @@
+.git
+.github
+.idea/
+.claude/
+bin/
+test/
+README.md
+CLAUDE.md
+**/.claude-plugin/types/

@@ -1,0 +1,5 @@
+bin/
+.idea/
+# Типы API модов: Claude Code кладёт их рядом с модом при загрузке из каталога.
+.claude-plugin/types/
+*.claude-plugins.bak

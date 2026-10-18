@@ -1,0 +1,37 @@
+{
+  "name": "context-guard",
+  "displayName": "Context guard",
+  "description": "Следит за заполнением контекста: на первом пороге просит модель не начинать новых крупных задач, на втором — завершить сессию и записать, что осталось. Предупреждает о лимитах 5 часов и 7 дней.",
+  "author": { "name": "scary-production", "url": "https://github.com/scary-production" },
+  "homepage": "https://github.com/scary-production/claude-plugins",
+  "repository": "https://github.com/scary-production/claude-plugins",
+  "license": "MIT",
+  "keywords": ["context", "rate-limits", "mod"],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "warn_at": {
+      "type": "number",
+      "title": "Первый порог контекста, %",
+      "description": "Модель доводит текущий шаг и не берётся за новые крупные задачи",
+      "default": 50,
+      "min": 5,
+      "max": 95
+    },
+    "wrap_at": {
+      "type": "number",
+      "title": "Второй порог контекста, %",
+      "description": "Модель завершает работу, записывает, что осталось, и предлагает новую сессию",
+      "default": 75,
+      "min": 10,
+      "max": 99
+    },
+    "rate_warn_at": {
+      "type": "number",
+      "title": "Порог лимита 5 часов или 7 дней, %",
+      "description": "Всплывающее предупреждение, один раз на окно",
+      "default": 90,
+      "min": 50,
+      "max": 100
+    }
+  }
+}

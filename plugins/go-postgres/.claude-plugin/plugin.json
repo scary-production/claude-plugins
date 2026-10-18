@@ -1,0 +1,10 @@
+{
+  "name": "go-postgres",
+  "displayName": "Go + PostgreSQL",
+  "description": "Скиллы для Go-сервисов на PostgreSQL: pgx и go-transaction-manager, конкурентная запись без потерянных обновлений, миграции с индексами на живых таблицах, тюнинг запросов по BUFFERS. Утверждения проверены на PostgreSQL 18 и pgx v5.11.",
+  "author": { "name": "scary-production", "url": "https://github.com/scary-production" },
+  "homepage": "https://github.com/scary-production/claude-plugins",
+  "repository": "https://github.com/scary-production/claude-plugins",
+  "license": "MIT",
+  "keywords": ["go", "postgresql", "pgx", "transactions", "migrations", "skills"]
+}
