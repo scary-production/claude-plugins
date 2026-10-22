@@ -18,6 +18,7 @@ Claude его не загружает.
 | `indcheckxmin` воспроизводится | старый снимок RR + UPDATE + `CREATE INDEX` | ✓ `indcheckxmin = t` |
 | `ADD VALUE` в транзакции работает, новое значение до коммита не использовать | `BEGIN; ALTER TYPE ... ADD VALUE; INSERT ...` | ✓ `55P04 unsafe use of new value`; после коммита — можно |
 | `DROP VALUE` нет | `ALTER TYPE ... DROP VALUE` | ✓ `0A000 not implemented` |
+| Ждущий `ALTER TABLE` держит и обычные `SELECT`; `lock_timeout` это снимает (2026-10-22) | транзакция с `SELECT` на 5 с, через 0,5 с `ALTER TABLE ... ADD COLUMN`, ещё через 0,5 с `SELECT count(*)` | ✓ без таймаута `SELECT` ждал 4 с — до конца транзакции; с `lock_timeout = 1s` `ALTER` упал `canceling statement due to lock timeout` через 1 с, `SELECT` ждал 0,5 с |
 | Константный `DEFAULT` не переписывает таблицу, volatile — переписывает | `relfilenode` до и после `ADD COLUMN` | ✓ не изменился / изменился |
 
 ## Не вошло

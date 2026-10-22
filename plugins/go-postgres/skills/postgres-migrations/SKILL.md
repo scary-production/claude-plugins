@@ -4,16 +4,17 @@ description: >
   SQL-миграции PostgreSQL: парные up/down-файлы, современные типы и ограничения
   (identity, text с CHECK, timestamptz, jsonb), откат каждой операции, добавление
   значения в enum, индексы на живых таблицах через CREATE INDEX CONCURRENTLY без
-  блокировки записи, что требовать от мигратора, разбор «индекс создан, а план —
-  Seq Scan».
-  PostgreSQL migrations: paired up/down files, modern types, reversible changes, non-blocking indexes, migrator requirements.
+  блокировки записи, lock_timeout перед ALTER на живой таблице, что требовать от
+  мигратора, разбор «индекс создан, а план — Seq Scan».
+  PostgreSQL migrations: paired up/down files, modern types, reversible changes, lock_timeout for DDL, non-blocking indexes, migrator requirements.
 when_to_use: >
   Создаёшь таблицу, меняешь схему, пишешь up/down-миграцию или индекс; новый индекс не
   используется планировщиком; миграция с CONCURRENTLY падает.
   Триггеры: "миграция", "migration", "create table", "alter table", "создай таблицу",
   "добавь колонку", "schema", "up.sql", "down.sql", "индекс", "create index",
   "concurrently", "invalid index", "indisvalid", "enum", "add value", "seq scan",
-  "индекс не используется".
+  "индекс не используется", "lock_timeout", "access exclusive", "миграция повесила
+  таблицу".
 ---
 
 # Миграции PostgreSQL
@@ -94,6 +95,19 @@ CREATE UNIQUE INDEX ix_users_email ON users (email);
 `IF EXISTS` в down — чтобы откат был идемпотентным.
 
 ## Типовые изменения
+
+**ALTER на живой таблице — с `lock_timeout`.** Многие формы `ALTER TABLE` (и `DROP TABLE`,
+`TRUNCATE`, `VACUUM FULL`, `REINDEX`, `CLUSTER`) берут `ACCESS EXCLUSIVE`, даже мгновенные.
+Ждущий такой замок встаёт в очередь, и все новые запросы к таблице, даже `SELECT`,
+становятся за ним: одна долгая транзакция или «idle in transaction» плюс миграция
+останавливают всю таблицу. Короткий `lock_timeout` превращает ожидание в ошибку `55P03`, и
+миграцию можно повторить позже. Перед запуском посмотри долгие транзакции в
+`pg_stat_activity` (`state = 'idle in transaction'`, старый `xact_start`).
+
+```sql
+SET LOCAL lock_timeout = '3s'; -- миграция в транзакции: действует до её конца
+ALTER TABLE orders ADD COLUMN note text;
+```
 
 **Колонка с дефолтом.** С константным `DEFAULT` таблица не переписывается (PostgreSQL 11+),
 команда мгновенная. С volatile-дефолтом (`gen_random_uuid()`, `clock_timestamp()`) таблица

@@ -26,4 +26,4 @@ go-transaction-manager v2.0.4).
 
 - Заморозка мультитранзакций, `vacuum_multixact_*`.
 - `log_lock_waits`, `deadlock_timeout` — кандидат в отдельный раздел о разборе зависаний.
-- Очередь за `ACCESS EXCLUSIVE` и `lock_timeout` для DDL — кандидат в postgres-migrations.
+- Очередь за `ACCESS EXCLUSIVE` и `lock_timeout` для DDL — в postgres-migrations.
