@@ -2,7 +2,7 @@
   "name": "scary-production",
   "owner": { "name": "scary-production", "url": "https://github.com/scary-production" },
   "metadata": {
-    "description": "Плагины Claude Code: строка состояния в нескольких стилях, пороги контекста и лимитов, скиллы для Go и PostgreSQL."
+    "description": "Плагины Claude Code: строка состояния в нескольких стилях, пороги контекста и лимитов, скиллы для Go-сервисов и PostgreSQL."
   },
   "plugins": [
     {
@@ -21,6 +21,12 @@
       "name": "go-postgres",
       "source": "./plugins/go-postgres",
       "description": "Скиллы для Go-сервисов на PostgreSQL: pgx и go-transaction-manager, конкурентная запись и блокировки, миграции, тюнинг запросов.",
+      "category": "development"
+    },
+    {
+      "name": "go-service",
+      "source": "./plugins/go-service",
+      "description": "Скиллы устройства Go-сервиса: точка входа и остановка в бюджете платформы, контракт доменного события, outbox и порядок событий, консьюмер брокера.",
       "category": "development"
     }
   ]

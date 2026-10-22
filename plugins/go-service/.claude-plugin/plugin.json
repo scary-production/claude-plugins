@@ -1,0 +1,10 @@
+{
+  "name": "go-service",
+  "displayName": "Go service",
+  "description": "Скиллы устройства Go-сервиса: точка входа, связывание зависимостей и остановка в бюджете платформы, контракт доменного события, outbox и порядок событий, консьюмер брокера. Утверждения проверены на Go 1.27 и PostgreSQL 18.",
+  "author": { "name": "scary-production", "url": "https://github.com/scary-production" },
+  "homepage": "https://github.com/scary-production/claude-plugins",
+  "repository": "https://github.com/scary-production/claude-plugins",
+  "license": "MIT",
+  "keywords": ["go", "architecture", "graceful-shutdown", "events", "outbox", "skills"]
+}
